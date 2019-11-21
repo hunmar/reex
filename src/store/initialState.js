@@ -1,6 +1,9 @@
 export default {
+  direction: "forward",
   fromWallet: 0,
   toWallet: 1,
+  fromWalletValue: 0,
+  toWalletValue: 0,
   wallets: [
     { currency: "USD", balance: 50 },
     { currency: "GBP", balance: 250 },

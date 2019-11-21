@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { InputNumber } from "antd";
+import { InputNumber, Button } from "antd";
 
 import Wallet from "./components/Wallet";
 import Rate from "./components/Rate";
@@ -9,10 +9,12 @@ import Rate from "./components/Rate";
 // import logo from "./logo.svg";
 import "./App.css";
 
-import { start } from "./actions";
+import { start, inputChanged, commitConvert } from "./actions";
 
 const mapDispatchToProps = dispatch => ({
-  start: () => dispatch(start())
+  start: () => dispatch(start()),
+  inputChanged: (direction, value) => dispatch(inputChanged(direction, value)),
+  commitConvert: () => dispatch(commitConvert())
 });
 
 const mapStateToProps = state => ({
@@ -38,8 +40,8 @@ class App extends Component {
           <InputNumber
             defaultValue={0}
             precision={2}
-
-            //   onChange={onChange}
+            value={this.props.fromWalletValue}
+            onChange={value => this.props.inputChanged("from", value)}
           ></InputNumber>
         </Wallet>
         <Rate></Rate>
@@ -47,10 +49,14 @@ class App extends Component {
           <InputNumber
             defaultValue={0}
             precision={2}
-
-            //   onChange={onChange}
+            value={this.props.toWalletValue}
+            onChange={value => this.props.inputChanged("to", value)}
           ></InputNumber>
         </Wallet>
+
+        <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
+          Convert!
+        </Button>
       </div>
     );
   }
