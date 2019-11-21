@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Provider } from "react-redux";
-import configureStore from "./store";
+import configureStore from "./store/index";
+import initialState from "./store/initialState";
 
 import App from "./App";
+
+import "antd/dist/antd.css";
 
 import "./index.css";
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
+  <Provider store={configureStore(initialState)}>
     <App />
   </Provider>,
 

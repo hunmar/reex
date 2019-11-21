@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Carousel } from "antd";
-import "antd/dist/antd.css";
+import { InputNumber } from "antd";
+
+import Wallet from "./components/Wallet";
+import Rate from "./components/Rate";
 
 // import logo from "./logo.svg";
 import "./App.css";
@@ -32,29 +34,23 @@ class App extends Component {
 
         <pre>{JSON.stringify(this.props)}</pre>
 
-        <Carousel>
-          <div>
-            <h3>USD</h3>
-          </div>
-          <div>
-            <h3>GBP</h3>
-          </div>
-          <div>
-            <h3>EUR</h3>
-          </div>
-        </Carousel>
+        <Wallet walletIndex={this.props.fromWallet} direction="from">
+          <InputNumber
+            defaultValue={0}
+            precision={2}
 
-        <Carousel>
-          <div>
-            <h3>USD</h3>
-          </div>
-          <div>
-            <h3>GBP</h3>
-          </div>
-          <div>
-            <h3>EUR</h3>
-          </div>
-        </Carousel>
+            //   onChange={onChange}
+          ></InputNumber>
+        </Wallet>
+        <Rate></Rate>
+        <Wallet walletIndex={this.props.toWallet} direction="to">
+          <InputNumber
+            defaultValue={0}
+            precision={2}
+
+            //   onChange={onChange}
+          ></InputNumber>
+        </Wallet>
       </div>
     );
   }
