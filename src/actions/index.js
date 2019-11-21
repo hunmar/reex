@@ -1,3 +1,5 @@
+import { buildExUrl } from "./helpers";
+
 let timer = null;
 
 export const UPDATE_RATES = "UPDATE_RATES";
@@ -23,23 +25,27 @@ export const start = () => dispatch => {
 export const getRates = () => (dispatch, getState) => {
   const state = getState();
 
-  return fetch(
-    `https://api.exchangeratesapi.io/latest?symbols=USD,GBP,EUR&base=${
-      state.wallets[state.fromWallet].currency
-    }`
-  )
-    .then(
-      response => response.json(),
-      error => console.log("An error occurred.", error)
-    )
-    .then(json => {
-      dispatch({
-        type: UPDATE_RATES,
-        payload: json
-      });
+  return (
+    fetch(buildExUrl(state))
+      .then(
+        response => response.json(),
+        error => console.log("An error occurred.", error)
+      )
+      // workaround cause sometimes API wont raturn values for symbols same as base
+      .then(json => {
+        json.rates[state.wallets[state.fromWallet].currency] = 1;
 
-      dispatch({ type: CONVERT });
-    });
+        return json;
+      })
+      .then(json => {
+        dispatch({
+          type: UPDATE_RATES,
+          payload: json
+        });
+
+        dispatch({ type: CONVERT });
+      })
+  );
 };
 
 export const changeFromWallet = newIndex => dispatch => {

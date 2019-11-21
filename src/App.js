@@ -34,8 +34,6 @@ class App extends Component {
           <h1 className="App-title">Welcome to ReEx</h1>
         </header>
 
-        <pre>{JSON.stringify(this.props)}</pre>
-
         <Wallet walletIndex={this.props.fromWallet} direction="from">
           <InputNumber
             defaultValue={0}
@@ -45,6 +43,9 @@ class App extends Component {
           ></InputNumber>
         </Wallet>
         <Rate></Rate>
+        <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
+          Convert!
+        </Button>
         <Wallet walletIndex={this.props.toWallet} direction="to">
           <InputNumber
             defaultValue={0}
@@ -53,10 +54,6 @@ class App extends Component {
             onChange={value => this.props.inputChanged("to", value)}
           ></InputNumber>
         </Wallet>
-
-        <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
-          Convert!
-        </Button>
       </div>
     );
   }

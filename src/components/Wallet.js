@@ -41,6 +41,7 @@ class Wallet extends Component {
       <React.Fragment>
         <Carousel
           ref={this.carouselRef}
+          dotPosition={"top"}
           beforeChange={(fromt, to) => this.handleChange(to)}
           swipeToSlide={true}
           customPaging={index => (
@@ -49,13 +50,11 @@ class Wallet extends Component {
         >
           {this.props.wallets.map((wallet, index) => (
             <div key={index}>
-              <h3>
-                {wallet.currency} — {wallet.balance}
-              </h3>
+              <h3>{`${wallet.balance}`}</h3>
+              {this.props.children}
             </div>
           ))}
         </Carousel>
-        {this.props.children}
       </React.Fragment>
     );
   }
