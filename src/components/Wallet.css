@@ -1,20 +1,29 @@
-.ant-carousel .slick-slide {
-    text-align: center;
+.ant-carousel {
+  background: #364d79;
+}
 
-    padding: 24px;
-    background: #364d79;
-    overflow: hidden;
+.ant-carousel .slick-slide {
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
 }
 
 .ant-carousel .slick-slide h3 {
-    color: #fff;
+  color: #fff;
 }
 
 .ant-carousel .slick-dots {
-    height: inherit;
+  height: inherit;
+  position: inherit;
 }
 
 .ant-carousel .slick-dots li {
-    color: white;
-    padding: 20px;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.ant-carousel .slick-dots .slick-active {
+  font-weight: bold;
+  cursor: inherit;
 }

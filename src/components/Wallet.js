@@ -42,7 +42,6 @@ class Wallet extends Component {
         <Carousel
           ref={this.carouselRef}
           beforeChange={(fromt, to) => this.handleChange(to)}
-          arrows={true}
           swipeToSlide={true}
           customPaging={index => (
             <span>{this.props.wallets[index].currency}</span>
