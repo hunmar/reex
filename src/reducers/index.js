@@ -66,17 +66,10 @@ export default (state = {}, action) => {
     case COMMIT_CONVERT:
       let newState = { ...state, fromWalletValue: 0, toWalletValue: 0 };
 
-      if (state.direction === "forward") {
-        getFromWallet(newState).balance =
-          getFromWalletBalance(newState) - state.fromWalletValue;
-        getToWallet(newState).balance =
-          getToWalletBalance(newState) + state.toWalletValue;
-      } else {
-        getFromWallet(newState).balance =
-          getFromWalletBalance(newState) + state.fromWalletValue;
-        getToWallet(newState).balance =
-          getToWalletBalance(newState) - state.toWalletValue;
-      }
+      getFromWallet(newState).balance =
+        getFromWalletBalance(newState) - state.fromWalletValue;
+      getToWallet(newState).balance =
+        getToWalletBalance(newState) + state.toWalletValue;
 
       return newState;
 
