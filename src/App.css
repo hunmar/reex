@@ -1,5 +1,10 @@
 .App {
+  height: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #364d79;
 }
 
 .App-logo {
@@ -15,7 +20,11 @@
     rgba(199, 0, 179, 1) 100%
   );
 
-  padding: 20px;
+  padding: 14px;
+}
+
+.App-header h1 {
+  margin-bottom: 0;
 }
 
 .App-title {
@@ -26,12 +35,10 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.separator .ant-btn {
+  width: 100%;
+  border-radius: 0;
+  font-size: 32px;
+  line-height: 40px;
+  height: 90px;
 }

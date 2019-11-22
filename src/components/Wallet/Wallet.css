@@ -1,0 +1,88 @@
+.ant-carousel {
+  background: #364d79;
+  margin-bottom: 28px;
+}
+
+.ant-carousel .slick-list {
+  padding-top: 48px;
+}
+
+.ant-carousel .slick-slide {
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.wallet__balance {
+  color: #ccc;
+  font-size: 12vh;
+  margin-bottom: 0;
+  flex: 1 0 25%;
+}
+
+.ant-carousel .slick-dots {
+  height: inherit;
+}
+
+.ant-carousel .slick-dots-top {
+  top: 0;
+}
+
+.ant-carousel .slick-dots li {
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 26px;
+  transition: font-size 100ms linear;
+}
+
+.ant-carousel .slick-dots .slick-active {
+  font-weight: bold;
+  cursor: inherit;
+  font-size: 22px;
+}
+
+.wallet .ant-input-number {
+  border: none;
+  outline: none;
+}
+
+.wallet .ant-input-number {
+  background-color: inherit;
+  color: #fff;
+  font-size: 12vh;
+  width: 100%;
+  height: inherit;
+}
+
+.wallet .ant-input-number-input:focus {
+  outline: none;
+}
+
+.wallet .ant-input-number-handler-wrap {
+  display: none;
+}
+
+.wallet {
+  display: flex;
+  justify-content: center;
+}
+
+.wallet .ant-input-number-input {
+  height: inherit;
+}
+
+.wallet .wallet__input {
+  position: relative;
+  flex: 1 0 33%;
+}
+
+.wallet .wallet__input::before {
+  position: absolute;
+  content: attr(data-prefix);
+  font-size: 12vh;
+  color: #ccc;
+  left: -70px;
+  top: 0px;
+}

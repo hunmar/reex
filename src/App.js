@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { InputNumber, Button } from "antd";
+import { Button } from "antd";
 
 import Wallet from "./components/Wallet";
 import Rate from "./components/Rate";
@@ -9,11 +9,11 @@ import Rate from "./components/Rate";
 // import logo from "./logo.svg";
 import "./App.css";
 
-import { start, inputChanged, commitConvert } from "./actions";
+import { start, commitConvert } from "./actions";
 
 const mapDispatchToProps = dispatch => ({
   start: () => dispatch(start()),
-  inputChanged: (direction, value) => dispatch(inputChanged(direction, value)),
+
   commitConvert: () => dispatch(commitConvert())
 });
 
@@ -34,26 +34,14 @@ class App extends Component {
           <h1 className="App-title">Welcome to ReEx</h1>
         </header>
 
-        <Wallet walletIndex={this.props.fromWallet} direction="from">
-          <InputNumber
-            defaultValue={0}
-            precision={2}
-            value={this.props.fromWalletValue}
-            onChange={value => this.props.inputChanged("from", value)}
-          ></InputNumber>
-        </Wallet>
-        <Rate></Rate>
-        <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
-          Convert!
-        </Button>
-        <Wallet walletIndex={this.props.toWallet} direction="to">
-          <InputNumber
-            defaultValue={0}
-            precision={2}
-            value={this.props.toWalletValue}
-            onChange={value => this.props.inputChanged("to", value)}
-          ></InputNumber>
-        </Wallet>
+        <Wallet walletIndex={this.props.fromWallet} direction="from"></Wallet>
+        <div className="separator">
+          <Rate></Rate>
+          <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
+            Convert!
+          </Button>
+        </div>
+        <Wallet walletIndex={this.props.toWallet} direction="to"></Wallet>
       </div>
     );
   }

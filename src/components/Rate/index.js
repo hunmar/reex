@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 // import { Carousel, InputNumber } from "antd";
 
-// import "./Rate.css";
+import "./Rate.css";
 
 const mapDispatchToProps = dispatch => ({});
 
@@ -22,7 +22,11 @@ class Rate extends Component {
   render() {
     const { rate, fromCurrency, toCurrency } = this.props;
 
-    return <div>{`1 ${fromCurrency} = ${rate} ${toCurrency}`}</div>;
+    return (
+      <div className="rate">{`1 ${fromCurrency} = ${rate.toFixed(
+        2
+      )} ${toCurrency}`}</div>
+    );
   }
 }
 

@@ -27,10 +27,7 @@ export const getRates = () => (dispatch, getState) => {
 
   return (
     fetch(buildExUrl(state))
-      .then(
-        response => response.json(),
-        error => console.log("An error occurred.", error)
-      )
+      .then(response => response.json())
       // workaround cause sometimes API wont raturn values for symbols same as base
       .then(json => {
         json.rates[state.wallets[state.fromWallet].currency] = 1;
@@ -45,6 +42,7 @@ export const getRates = () => (dispatch, getState) => {
 
         dispatch({ type: CONVERT });
       })
+      .catch(error => console.log("An error occurred.", error))
   );
 };
 

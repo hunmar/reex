@@ -42,18 +42,33 @@ export default (state = {}, action) => {
 
     case CONVERT:
       if (state.direction === "forward") {
+        const maxFromValue = Math.min(
+          state.fromWalletValue,
+          getFromWalletBalance(state)
+        );
+
         return {
           ...state,
+          fromWalletValue: +maxFromValue.toFixed(2),
           toWalletValue: +(
-            state.fromWalletValue * getCurrentExchangeRate(state)
+            maxFromValue * getCurrentExchangeRate(state)
           ).toFixed(2)
         };
       } else {
+        const fromWalletBalance = getFromWalletBalance(state);
+        const maxToValue = fromWalletBalance * getCurrentExchangeRate(state);
+        let acceptableValue = state.toWalletValue;
+
+        if (state.toWalletValue > maxToValue) {
+          acceptableValue = maxToValue;
+        }
+
         return {
           ...state,
           fromWalletValue: +(
-            state.toWalletValue / getCurrentExchangeRate(state)
-          ).toFixed(2)
+            acceptableValue / getCurrentExchangeRate(state)
+          ).toFixed(2),
+          toWalletValue: +acceptableValue.toFixed(2)
         };
       }
 
@@ -66,10 +81,12 @@ export default (state = {}, action) => {
     case COMMIT_CONVERT:
       let newState = { ...state, fromWalletValue: 0, toWalletValue: 0 };
 
-      getFromWallet(newState).balance =
-        getFromWalletBalance(newState) - state.fromWalletValue;
-      getToWallet(newState).balance =
-        getToWalletBalance(newState) + state.toWalletValue;
+      getFromWallet(newState).balance = +(
+        getFromWalletBalance(newState) - state.fromWalletValue
+      ).toFixed(2);
+      getToWallet(newState).balance = +(
+        getToWalletBalance(newState) + state.toWalletValue
+      ).toFixed(2);
 
       return newState;
 
