@@ -33,15 +33,20 @@ class App extends Component {
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1 className="App-title">Welcome to ReEx</h1>
         </header>
-
-        <Wallet walletIndex={this.props.fromWallet} direction="from"></Wallet>
-        <div className="separator">
-          <Rate></Rate>
-          <Button type="primary" icon="sync" onClick={this.props.commitConvert}>
-            Convert!
-          </Button>
-        </div>
-        <Wallet walletIndex={this.props.toWallet} direction="to"></Wallet>
+        <main className="App-main">
+          <Wallet walletIndex={this.props.fromWallet} direction="from"></Wallet>
+          <div className="separator">
+            <Button
+              type="primary"
+              icon="sync"
+              onClick={this.props.commitConvert}
+            >
+              Convert!
+            </Button>
+            <Rate></Rate>
+          </div>
+          <Wallet walletIndex={this.props.toWallet} direction="to"></Wallet>
+        </main>
       </div>
     );
   }

@@ -1,10 +1,8 @@
 .App {
   height: 100%;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #364d79;
+  background-color: #fafafa;
+  padding: 20px 32px 32px;
 }
 
 .App-logo {
@@ -13,14 +11,7 @@
 }
 
 .App-header {
-  background: rgb(0, 209, 255);
-  background: linear-gradient(
-    45deg,
-    rgba(0, 209, 255, 1) 0%,
-    rgba(199, 0, 179, 1) 100%
-  );
-
-  padding: 14px;
+  margin-bottom: 32px;
 }
 
 .App-header h1 {
@@ -28,11 +19,30 @@
 }
 
 .App-title {
-  color: white;
+  color: #222;
+
+  font-weight: bold;
+
+  background: linear-gradient(
+    45deg,
+    rgba(0, 209, 255, 1) 0%,
+    rgba(199, 0, 179, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.App-main {
+  height: 100%;
+}
+
+.separator {
+  margin: 40px 0;
+  margin: 20px 0 60px;
 }
 
 .separator .ant-btn {

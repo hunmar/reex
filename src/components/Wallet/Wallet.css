@@ -1,5 +1,5 @@
 .ant-carousel {
-  background: #364d79;
+  background-color: #fafafa;
   margin-bottom: 28px;
 }
 
@@ -15,9 +15,16 @@
 
 .wallet__balance {
   color: #ccc;
-  font-size: 12vh;
+  font-size: 10vh;
   margin-bottom: 0;
   flex: 1 0 25%;
+  position: relative;
+}
+
+.wallet__balance::before {
+  content: "You have";
+  font-size: 12px;
+  position: absolute;
 }
 
 .ant-carousel .slick-dots {
@@ -29,7 +36,7 @@
 }
 
 .ant-carousel .slick-dots li {
-  color: white;
+  color: #222;
   padding: 20px;
   cursor: pointer;
   font-size: 18px;
@@ -50,8 +57,8 @@
 
 .wallet .ant-input-number {
   background-color: inherit;
-  color: #fff;
-  font-size: 12vh;
+  color: #222;
+  font-size: 10vh;
   width: 100%;
   height: inherit;
 }
@@ -81,7 +88,7 @@
 .wallet .wallet__input::before {
   position: absolute;
   content: attr(data-prefix);
-  font-size: 12vh;
+  font-size: 10vh;
   color: #ccc;
   left: -7vh;
   top: 0px;
