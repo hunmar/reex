@@ -4,12 +4,12 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
-import initialState from "./store/initialState";
+import initialState from "../../store/initialState";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-import App from "./App";
+import App from ".";
 
 describe("Revolut exchange", () => {
   let store;

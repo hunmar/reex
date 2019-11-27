@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import { Button } from "antd";
 
-import Wallet from "./components/Wallet";
-import Rate from "./components/Rate";
+import Wallet from "../Wallet";
+import Rate from "../Rate";
 
 // import logo from "./logo.svg";
 import "./App.css";
 
-import { start, commitConvert } from "./actions";
+import { start, commitConvert } from "../../actions";
 
 const mapDispatchToProps = dispatch => ({
   start: () => dispatch(start()),

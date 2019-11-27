@@ -4,8 +4,8 @@ let timer = null;
 
 export const UPDATE_RATES = "UPDATE_RATES";
 
-export const FROM_WALLET_CHANGED = "FROM_WALLET_CHANGED;";
-export const TO_WALLET_CHANGED = "FROM_WALLET_CHANGED";
+export const FROM_WALLET_CHANGED = "FROM_WALLET_CHANGED";
+export const TO_WALLET_CHANGED = "TO_WALLET_CHANGED";
 
 export const FROM_WALLET_VALUE_CHANGED = "FROM_WALLET_VALUE_CHANGED";
 export const TO_WALLET_VALUE_CHANGED = "TO_WALLET_VALUE_CHANGED";
@@ -29,11 +29,7 @@ export const getRates = () => (dispatch, getState) => {
     fetch(buildExUrl(state))
       .then(response => response.json())
       // workaround cause sometimes API wont raturn values for symbols same as base
-      .then(json => {
-        json.rates[state.wallets[state.fromWallet].currency] = 1;
-
-        return json;
-      })
+      .then(json => fixSelfConvertation(state, json))
       .then(json => {
         dispatch({
           type: UPDATE_RATES,

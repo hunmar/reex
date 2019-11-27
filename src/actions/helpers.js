@@ -11,3 +11,9 @@ export const buildExUrl = state => {
     ","
   )}&base=${state.wallets[state.fromWallet].currency}`;
 };
+
+export const fixSelfConvertation = (state, json) => {
+  json.rates[state.wallets[state.fromWallet].currency] = 1;
+
+  return json;
+};

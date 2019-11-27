@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import configureStore from "./store/index";
 import initialState from "./store/initialState";
 
-import App from "./App";
+import App from "./components/App";
 
 import "./index.css";
 
