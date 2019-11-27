@@ -1,19 +1,25 @@
-import { buildExUrl } from "./helpers";
+import { createAction } from "redux-actions";
+
+import { buildExUrl, fixSelfConvertation } from "./helpers";
 
 let timer = null;
 
-export const UPDATE_RATES = "UPDATE_RATES";
+export const UPDATE_RATES = createAction("UPDATE_RATES");
 
-export const FROM_WALLET_CHANGED = "FROM_WALLET_CHANGED";
-export const TO_WALLET_CHANGED = "TO_WALLET_CHANGED";
+export const SET_CONVERTATION_DIRECTION = createAction(
+  "SET_CONVERTATION_DIRECTION"
+);
 
-export const FROM_WALLET_VALUE_CHANGED = "FROM_WALLET_VALUE_CHANGED";
-export const TO_WALLET_VALUE_CHANGED = "TO_WALLET_VALUE_CHANGED";
+export const CONVERT = createAction("CONVERT");
+export const COMMIT_CONVERT = createAction("COMMIT_CONVERT");
 
-export const SET_CONVERTATION_DIRECTION = "SET_CONVERTATION_DIRECTION";
+export const FROM_WALLET_CHANGED = createAction("FROM_WALLET_CHANGED");
+export const TO_WALLET_CHANGED = createAction("TO_WALLET_CHANGED");
 
-export const CONVERT = "CONVERT";
-export const COMMIT_CONVERT = "COMMIT_CONVERT";
+export const FROM_WALLET_VALUE_CHANGED = createAction(
+  "FROM_WALLET_VALUE_CHANGED"
+);
+export const TO_WALLET_VALUE_CHANGED = createAction("TO_WALLET_VALUE_CHANGED");
 
 export const start = () => dispatch => {
   clearInterval(timer);
@@ -31,38 +37,33 @@ export const getRates = () => (dispatch, getState) => {
       // workaround cause sometimes API wont raturn values for symbols same as base
       .then(json => fixSelfConvertation(state, json))
       .then(json => {
-        dispatch({
-          type: UPDATE_RATES,
-          payload: json
-        });
-
-        dispatch({ type: CONVERT });
+        dispatch(UPDATE_RATES(json));
+        dispatch(CONVERT());
       })
       .catch(error => console.log("An error occurred.", error))
   );
 };
 
 export const changeFromWallet = newIndex => dispatch => {
-  dispatch({ type: FROM_WALLET_CHANGED, payload: newIndex });
+  dispatch(FROM_WALLET_CHANGED(newIndex));
   dispatch(getRates());
 };
 
 export const changeToWallet = newIndex => dispatch => {
-  dispatch({ type: TO_WALLET_CHANGED, payload: newIndex });
-  dispatch({ type: CONVERT });
+  dispatch(TO_WALLET_CHANGED(newIndex));
+  dispatch(CONVERT());
 };
 
 export const inputChanged = (direction, value) => dispatch => {
   if (direction === "from") {
-    dispatch({ type: FROM_WALLET_VALUE_CHANGED, payload: value });
-    dispatch({ type: SET_CONVERTATION_DIRECTION, payload: "forward" });
+    dispatch(FROM_WALLET_VALUE_CHANGED(value));
+    SET_CONVERTATION_DIRECTION("forward");
   } else {
-    dispatch({ type: TO_WALLET_VALUE_CHANGED, payload: value });
-    dispatch({ type: SET_CONVERTATION_DIRECTION, payload: "backward" });
+    dispatch(TO_WALLET_VALUE_CHANGED(value));
+    SET_CONVERTATION_DIRECTION("backward");
   }
 
-  dispatch({ type: CONVERT });
+  dispatch(CONVERT());
 };
 
-export const commitConvert = () => dispatch =>
-  dispatch({ type: COMMIT_CONVERT });
+export const commitConvert = () => dispatch => dispatch(COMMIT_CONVERT());

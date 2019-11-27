@@ -1,3 +1,5 @@
+import { handleActions } from "redux-actions";
+
 import {
   UPDATE_RATES,
   FROM_WALLET_CHANGED,
@@ -17,30 +19,11 @@ import {
   getToWalletBalance
 } from "../selectors";
 
-export default (state = {}, action) => {
-  switch (action.type) {
-    case UPDATE_RATES:
-      return { ...state, ex: action.payload };
+export default handleActions(
+  {
+    [UPDATE_RATES]: (state, action) => ({ ...state, ex: action.payload }),
 
-    case FROM_WALLET_CHANGED:
-      return { ...state, fromWallet: action.payload };
-
-    case TO_WALLET_CHANGED:
-      return { ...state, toWallet: action.payload };
-
-    case FROM_WALLET_VALUE_CHANGED:
-      return {
-        ...state,
-        fromWalletValue: action.payload
-      };
-
-    case TO_WALLET_VALUE_CHANGED:
-      return {
-        ...state,
-        toWalletValue: action.payload
-      };
-
-    case CONVERT:
+    [CONVERT]: (state, action) => {
       if (state.direction === "forward") {
         const maxFromValue = Math.min(
           state.fromWalletValue,
@@ -71,26 +54,52 @@ export default (state = {}, action) => {
           toWalletValue: +acceptableValue.toFixed(2)
         };
       }
+    },
 
-    case SET_CONVERTATION_DIRECTION:
-      return {
-        ...state,
-        direction: action.payload
-      };
+    [FROM_WALLET_CHANGED]: (state, action) => ({
+      ...state,
+      fromWallet: action.payload
+    }),
 
-    case COMMIT_CONVERT:
+    [TO_WALLET_CHANGED]: (state, action) => ({
+      ...state,
+      toWallet: action.payload
+    }),
+
+    [FROM_WALLET_CHANGED]: (state, action) => ({
+      ...state,
+      fromWallet: action.payload
+    }),
+
+    [FROM_WALLET_VALUE_CHANGED]: (state, action) => ({
+      ...state,
+      fromWalletValue: action.payload
+    }),
+
+    [TO_WALLET_VALUE_CHANGED]: (state, action) => ({
+      ...state,
+      toWalletValue: action.payload
+    }),
+
+    [SET_CONVERTATION_DIRECTION]: (state, action) => ({
+      ...state,
+      direction: action.payload
+    }),
+
+    [COMMIT_CONVERT]: (state, action) => {
       let newState = { ...state, fromWalletValue: 0, toWalletValue: 0 };
 
       getFromWallet(newState).balance = +(
         getFromWalletBalance(newState) - state.fromWalletValue
       ).toFixed(2);
+
       getToWallet(newState).balance = +(
         getToWalletBalance(newState) + state.toWalletValue
       ).toFixed(2);
 
       return newState;
+    }
+  },
 
-    default:
-      return state;
-  }
-};
+  {}
+);
