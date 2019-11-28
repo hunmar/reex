@@ -59,10 +59,10 @@ export const inputChanged = (direction, value) => dispatch => {
 
   if (direction === "from") {
     dispatch(FROM_WALLET_VALUE_CHANGED(value));
-    SET_CONVERTATION_DIRECTION("forward");
+    dispatch(SET_CONVERTATION_DIRECTION("forward"));
   } else {
     dispatch(TO_WALLET_VALUE_CHANGED(value));
-    SET_CONVERTATION_DIRECTION("backward");
+    dispatch(SET_CONVERTATION_DIRECTION("backward"));
   }
 
   dispatch(CONVERT());
