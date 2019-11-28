@@ -55,6 +55,8 @@ export const changeToWallet = newIndex => dispatch => {
 };
 
 export const inputChanged = (direction, value) => dispatch => {
+  if (isNaN(value)) return false;
+
   if (direction === "from") {
     dispatch(FROM_WALLET_VALUE_CHANGED(value));
     SET_CONVERTATION_DIRECTION("forward");
